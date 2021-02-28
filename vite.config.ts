@@ -7,4 +7,5 @@ export default defineConfig({
   // This makes the WebSocket for Hot Module Reloading available via Codespaces.
   server: { hmr: { port: 443 } },
   css: { modules: { localsConvention: "camelCaseOnly" } },
+  base: "./",
 });
