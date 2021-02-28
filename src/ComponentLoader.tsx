@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { PropertyControl } from "./ConnectProps";
+import { extractComponents } from "./framer/module";
 import { patchGlobals } from "./patchGlobals";
 import { Button } from "./ui/Button";
 import { HStack } from "./ui/Stack";
@@ -7,14 +7,11 @@ import { HStack } from "./ui/Stack";
 // Make sure that the imported module can use React and Framer globals.
 patchGlobals();
 
-type FramerComponent = React.ComponentType<Record<string, unknown>> & {
-  propertyControls?: Record<string, PropertyControl>;
-};
-
 export interface ComponentInfo {
-  Component: FramerComponent;
   importURL: string;
-  identifier: string;
+  component: React.ComponentType<Record<string, unknown>>;
+  exportSpecifier: string;
+  variableProps: string[];
 }
 
 interface Props {
@@ -29,14 +26,12 @@ export function ComponentLoader({ onComponent }: Props) {
     setIsLoading(true);
     import(/* @vite-ignore */ url)
       .then((module) => {
-        // For now, just return the first exported name starting with an upper case letter.
-        const key =
-          Object.keys(module).find((k) => k.match(/^[A-Z]/)) || "default";
-        onComponent({
-          Component: module[key],
-          importURL: url,
-          identifier: key,
-        });
+        const components = extractComponents(module);
+        // For now, just return the first component found (if any).
+        if (components.length === 0) {
+          throw Error("Module did not contain any components");
+        }
+        onComponent({ ...components[0], importURL: url });
       })
       .catch((error) => {
         console.warn(error);

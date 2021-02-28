@@ -9,9 +9,6 @@ interface Props {
 }
 
 export function ComponentPreview({ Component, props }: Props) {
-  if (!Component) {
-    return <div>Loading…</div>;
-  }
   const width =
     Component.defaultProps && Component.defaultProps.width
       ? (Component.defaultProps.width as number)

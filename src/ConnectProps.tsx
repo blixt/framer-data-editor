@@ -4,35 +4,21 @@ import { VStack } from "./ui/Stack";
 import { Subtitle } from "./ui/Subtitle";
 import { Title } from "./ui/Title";
 
-export interface PropertyControl {
-  [key: string]: unknown;
-  propName?: string;
-  title?: string;
-}
-
 interface Props {
   onPropChange: (info: { name: string; expression: string }) => void;
-  propertyControls?: Record<string, PropertyControl>;
+  variableProps?: string[];
 }
 
-export function ConnectProps({ onPropChange, propertyControls }: Props) {
+export function ConnectProps({ onPropChange, variableProps }: Props) {
   const props = useMemo(() => {
-    if (!propertyControls) return null;
-    return Object.entries(propertyControls).map(([name, prop]) => {
-      const propName = prop.propName || name;
+    if (!variableProps) return null;
+    return variableProps.map((name) => {
       const handleChange = (expression: string) => {
-        onPropChange({ name: propName, expression });
+        onPropChange({ name, expression });
       };
-      return (
-        <Prop
-          key={propName}
-          onChange={handleChange}
-          name={propName}
-          prop={prop}
-        />
-      );
+      return <Prop key={name} onChange={handleChange} name={name} />;
     });
-  }, [onPropChange, propertyControls]);
+  }, [onPropChange, variableProps]);
   if (!props) {
     return (
       <VStack>

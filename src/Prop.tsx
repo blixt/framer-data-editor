@@ -1,17 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Field } from "./ui/Field";
 
-export interface PropInfo {
-  title?: string;
-}
-
 interface Props {
   onChange: (expression: string) => void;
   name: string;
-  prop: PropInfo;
 }
 
-export function Prop({ onChange, name, prop }: Props) {
+export function Prop({ onChange, name }: Props) {
   const [expression, setExpression] = useState("");
 
   const handleChange = useCallback((event) => {
@@ -30,7 +25,7 @@ export function Prop({ onChange, name, prop }: Props) {
   }, [expression]);
 
   return (
-    <Field label={prop.title || name}>
+    <Field label={name}>
       <input
         onChange={handleChange}
         onDoubleClick={fillDefault}

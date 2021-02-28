@@ -60,11 +60,11 @@ export function App() {
       attrs.push(`${name}={${propsMap[name].expression}}`);
     }
     const importBinding =
-      info.identifier === "default"
+      info.exportSpecifier === "default"
         ? "Component"
-        : info.identifier === "Component"
-        ? `{ ${info.identifier} }`
-        : `{ ${info.identifier} as Component }`;
+        : info.exportSpecifier === "Component"
+        ? `{ ${info.exportSpecifier} }`
+        : `{ ${info.exportSpecifier} as Component }`;
     return `
 import * as React from "react";
 import { Stack } from "framer";
@@ -115,7 +115,7 @@ export default DataComponent;
       <div className={`${classes.preview} ${classes.helper}`}>
         <ErrorBoundary>
           {info ? (
-            <ComponentPreview Component={info.Component} props={props} />
+            <ComponentPreview Component={info.component} props={props} />
           ) : (
             <ComponentLoader onComponent={setInfo} />
           )}
@@ -125,7 +125,7 @@ export default DataComponent;
         <div className={classes.config}>
           <ConnectData onDataSource={setDataSource} />
           <ConnectProps
-            propertyControls={info?.Component?.propertyControls}
+            variableProps={info?.variableProps}
             onPropChange={handlePropChange}
           />
         </div>
