@@ -1,10 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
-import "./index.css";
-
-//hello
-var x = 123;
+import { App } from "./App";
+import "./main.css";
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,0 +1,9 @@
+.heading {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  letter-spacing: -0.65px;
+  line-height: 1.2;
+  font-weight: 600;
+  font-size: 24px;
+}

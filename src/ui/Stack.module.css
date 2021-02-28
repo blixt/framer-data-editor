@@ -1,0 +1,16 @@
+.hStack, .vStack {
+  display: flex;
+  gap: 5px;
+}
+
+.hStack {
+  flex-direction: row;
+}
+
+.vStack {
+  flex-direction: column;
+}
+
+.spacer {
+  flex: 1;
+}

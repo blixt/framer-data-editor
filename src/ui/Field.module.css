@@ -1,0 +1,12 @@
+.field {
+  height: 30px;
+}
+
+.field strong:first-child {
+  height: 30px;
+  line-height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100px;
+}
