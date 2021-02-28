@@ -5,6 +5,7 @@ import { ComponentPreview } from "./ComponentPreview";
 import { ConnectData, DataSource } from "./ConnectData";
 import { ConnectProps } from "./ConnectProps";
 import { ErrorBoundary } from "./ErrorBoundary";
+import { api } from "./framer/api";
 import { CodeGen, ComponentGen } from "./framer/codegen";
 import { Button } from "./ui/Button";
 
@@ -61,10 +62,7 @@ export function App() {
 
   const handleSave = useCallback(() => {
     if (!source) return;
-    window.parent?.postMessage(
-      JSON.stringify({ type: "updateSource", source }),
-      "*"
-    );
+    api.updateSource(source);
   }, [source]);
 
   return (
