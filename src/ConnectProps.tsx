@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
 import { Prop } from "./Prop";
-import { Heading } from "./ui/Heading";
 import { VStack } from "./ui/Stack";
 import { Subtitle } from "./ui/Subtitle";
+import { Title } from "./ui/Title";
 
 export interface PropertyControl {
   [key: string]: unknown;
@@ -36,14 +36,14 @@ export function ConnectProps({ onPropChange, propertyControls }: Props) {
   if (!props) {
     return (
       <VStack>
-        <Heading>Pick a component</Heading>
+        <Title>Pick a component</Title>
         <Subtitle>First, pick a component with property controls.</Subtitle>
       </VStack>
     );
   }
   return (
     <VStack>
-      <Heading>Hook up the data</Heading>
+      <Title>Hook up the data</Title>
       {props}
     </VStack>
   );

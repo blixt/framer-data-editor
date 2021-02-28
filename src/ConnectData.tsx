@@ -6,9 +6,9 @@ import React, {
   useState,
 } from "react";
 import { Field } from "./ui/Field";
-import { Heading } from "./ui/Heading";
 import { VStack } from "./ui/Stack";
 import { Subtitle } from "./ui/Subtitle";
+import { Title } from "./ui/Title";
 
 export interface DataSource {
   url: string;
@@ -82,7 +82,7 @@ export function ConnectData({ onDataSource }: Props) {
   const exampleURL = "https://www.spaceflightnewsapi.net/api/v2/articles";
   return (
     <VStack>
-      <Heading>Find some data</Heading>
+      <Title>Find some data</Title>
       <Field label="JSON URL">
         <input
           placeholder="https://…"
